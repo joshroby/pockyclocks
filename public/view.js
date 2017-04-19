@@ -39,18 +39,18 @@ var view = {
 			newClockTitleUpdateButton.innerHTML = 'update';
 			newClockTitleUpdateButton.setAttribute('onclick','handlers.updateTitle('+i+')');
 			newClockTitleUpdate.appendChild(newClockTitleUpdateButton);
-			
+
 			var newClockMoveSpan = document.createElement('span');
 			newClockMoveSpan.className = 'clockMoveSpan';
 			newClockTitle.appendChild(newClockMoveSpan);
-			
+
 			var newClockMoveIcon = document.createElementNS('http://www.w3.org/2000/svg','svg');
 			newClockMoveIcon.setAttribute('viewBox','0 0 10 10');
 			newClockMoveIcon.setAttribute('height','2vh');
 			newClockMoveIcon.setAttribute('width','2vh');
 			newClockMoveIcon.addEventListener('mousedown',handlers.pickupClock.bind(newClockDiv),false);
 			newClockMoveSpan.appendChild(newClockMoveIcon);
-			
+
 			var newClockMoveIconBackdrop = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			newClockMoveIconBackdrop.setAttribute('x',0);
 			newClockMoveIconBackdrop.setAttribute('y',0);
@@ -60,7 +60,7 @@ var view = {
 			newClockMoveIconBackdrop.setAttribute('rx',2);
 			newClockMoveIconBackdrop.setAttribute('fill','gray');
 			newClockMoveIcon.appendChild(newClockMoveIconBackdrop);
-			
+
 			var newClockMoveIconArrows = document.createElementNS('http://www.w3.org/2000/svg','path');
 			newClockMoveIconArrows.setAttribute('stroke','#333333');
 			newClockMoveIconArrows.setAttributeNS(null,'d','m 5,1 l-1,1 h1 v3 h-3 v-1 l-1,1 l1,1 v-1 h3 v3 h-1 l1,1 l1,-1 h-1 v-3 h3 v1 l1,-1 l-1,-1 v1 h-3 v-3 h1 l-1,-1 z');
@@ -145,7 +145,7 @@ var view = {
 			newClockAdvanceButton.className = 'newClockControlButton';
 			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
 			newClockControlsDiv.appendChild(newClockAdvanceButton);
-			
+
 			var newClockColorSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
 			newClockColorSVG.setAttribute('viewBox','0 0 10 10');
 			newClockColorSVG.setAttribute('height','1vh');
@@ -174,7 +174,7 @@ var view = {
 			rainbow.setAttribute('rx',2);
 			rainbow.setAttribute('fill','url(#rainbowGradient)');
 			newClockColorSVG.appendChild(rainbow);
-			
+
 			var newClockColorButton = document.createElement('button');
 			newClockColorButton.className = 'newClockControlButton';
 			newClockColorButton.setAttribute('onclick','handlers.displayColorPanel('+i+')');
