@@ -6,8 +6,8 @@ Requirements for Pockyclocks:
 4. A countdown clock has a title.
 5. A countdown clock has optional notes.
 6. A countdown clock can be up to eight segments.
-7. GMs can fill in segments of a countdown clock.
-8. GMs can remove filled-in segments of countdown clocks.
+7. GMs can fill in segments of a countdown clock, also known as Advancing.
+8. GMs can remove filled-in segments of countdown clocks, also known as Rewinding.
 9. Pockyclock spaces have a access code that can be shared.
 10. Any user with an access clock can see a Pockyclock space.
 11. A countdown clock can be active, complete, or unneeded.
