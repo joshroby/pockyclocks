@@ -65,15 +65,15 @@ var handlers = {
 	dropClock: function(clock) {
 		window.removeEventListener('mousemove',handlers.moveClock,true);
 	},
-	
+
 	displayColorPanel: function(clock) {
 		view.displayColorPanel(clock);
 	},
-	
+
 	updateColorInput: function(clock,color) {
 		document.getElementById('colorInput_'+clock).value = color;
 	},
-	
+
 	updateColor: function(clock) {
 		view.updateClockColor(clock,document.getElementById('colorInput_'+clock).value);
 	},

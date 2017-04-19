@@ -202,64 +202,64 @@ var view = {
 		segment.setAttribute('stroke','red');
 		segment.setAttribute('stroke-width',3);
 	},
-	
+
 	displayColorPanel: function(clock) {
 		var newClockSegmentViewDiv = document.getElementById('clockSegmentViewDiv_'+clock);
 		newClockSegmentViewDiv.innerHTML = '';
-		
+
 		var redButton = document.createElement('button');
 		redButton.style.backgroundColor = '#ff0000';
 		redButton.className = 'dumbColorSelectButton';
 		redButton.innerHTML = '&nbsp;';
 		redButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#ff0000")');
 		newClockSegmentViewDiv.appendChild(redButton);
-		
+
 		var orangeButton = document.createElement('button');
 		orangeButton.style.backgroundColor = '#d2691e';
 		orangeButton.className = 'dumbColorSelectButton';
 		orangeButton.innerHTML = '&nbsp;';
 		orangeButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#d2691e")');
 		newClockSegmentViewDiv.appendChild(orangeButton);
-		
+
 		var yellowButton = document.createElement('button');
 		yellowButton.style.backgroundColor = '#ffd700';
 		yellowButton.className = 'dumbColorSelectButton';
 		yellowButton.innerHTML = '&nbsp;';
 		yellowButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#ffd700")');
 		newClockSegmentViewDiv.appendChild(yellowButton);
-		
+
 		var greenButton = document.createElement('button');
 		greenButton.style.backgroundColor = '#228b22';
 		greenButton.className = 'dumbColorSelectButton';
 		greenButton.innerHTML = '&nbsp;';
 		greenButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#228b22")');
 		newClockSegmentViewDiv.appendChild(greenButton);
-		
+
 		var blueButton = document.createElement('button');
 		blueButton.style.backgroundColor = '#1e90ff';
 		blueButton.className = 'dumbColorSelectButton';
 		blueButton.innerHTML = '&nbsp;';
 		blueButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#1e90ff")');
 		newClockSegmentViewDiv.appendChild(blueButton);
-		
+
 		var indigoButton = document.createElement('button');
 		indigoButton.style.backgroundColor = '#191970';
 		indigoButton.className = 'dumbColorSelectButton';
 		indigoButton.innerHTML = '&nbsp;';
 		indigoButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#191970")');
 		newClockSegmentViewDiv.appendChild(indigoButton);
-		
+
 		var violetButton = document.createElement('button');
 		violetButton.style.backgroundColor = '#b155d3';
 		violetButton.className = 'dumbColorSelectButton';
 		violetButton.innerHTML = '&nbsp;';
 		violetButton.setAttribute('onclick','handlers.updateColorInput('+clock+',"#b155d3")');
 		newClockSegmentViewDiv.appendChild(violetButton);
-		
+
 		var colorInput = document.createElement('input');
 		colorInput.id = 'colorInput_'+clock;
 		colorInput.setAttribute('type','color');
-		colorInput.setAttribute('value','#666666');		
+		colorInput.setAttribute('value','#666666');
 		newClockSegmentViewDiv.appendChild(colorInput);
 
 		var updateColorButton = document.createElement('button');
@@ -272,22 +272,22 @@ var view = {
 		dismissColorButton.innerHTML = 'X';
 		newClockSegmentViewDiv.appendChild(dismissColorButton);
 	},
-	
+
 	updateClockColor: function(clock,color) {
 		var red = parseInt(color.substring(1,3),16);
 		var green = parseInt(color.substring(3,5),16);
 		var blue = parseInt(color.substring(5,7),16);
-		
+
 		if (red < 128 && green < 128 && blue < 128) {
 			clocks[clock].colors.text = 'white';
 		} else {
 			clocks[clock].colors.text = 'black';
 		};
-		
+
 		red /= 2;
 		green /= 2;
 		blue /= 2;
-		
+
 		var darkerColor = '#' + ("0" + Math.round(red).toString(16)).substr(-2) + ("0" + Math.round(green).toString(16)).substr(-2) + ("0" + Math.round(blue).toString(16)).substr(-2);
 
 		if (red < 128 && green < 128 && blue < 128) {
@@ -295,7 +295,7 @@ var view = {
 		} else {
 			clocks[clock].colors.header = 'black';
 		};
-				
+
 		clocks[clock].colors.background = color;
 		clocks[clock].colors.headerBackground = darkerColor;
 		view.refreshClocks();
