@@ -19,6 +19,19 @@
 
 		<div id='controlsDiv'>
 			<button onclick='handlers.newClock()'>Add a Clock</button>
+			<select id='addHarmClockSelect' onchange='handlers.addHarmClock()'>
+				<option disabled selected>Add a Harm Clock</option>
+				<option value = 'PCHarm' >Add a PC Harm Clock</option>
+				<option value = 'NPCHarm' >Add a NPC Harm Clock</option>
+				<option value = 'GangHarm' >Add a Gang Harm Clock</option>
+				<option value = 'VehicleHarm' >Add a Vehicle Harm Clock</option>
+			</select>
+			<button onclick='handlers.newClock("Legwork")'>Add a Legwork Clock</button>
+			<button onclick='handlers.newClock("Mission")'>Add a Mission Clock</button>
+			<select>
+				<option selected>Apocalypse World</option>
+				<option disabled>Sprawl</option>
+			</select>
 		</div>
 
 	</body>
