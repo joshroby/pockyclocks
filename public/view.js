@@ -39,18 +39,18 @@ var view = {
 			newClockTitleUpdateButton.innerHTML = 'update';
 			newClockTitleUpdateButton.setAttribute('onclick','handlers.updateTitle('+i+')');
 			newClockTitleUpdate.appendChild(newClockTitleUpdateButton);
-
+			
 			var newClockMoveSpan = document.createElement('span');
 			newClockMoveSpan.className = 'clockMoveSpan';
 			newClockTitle.appendChild(newClockMoveSpan);
-
+			
 			var newClockMoveIcon = document.createElementNS('http://www.w3.org/2000/svg','svg');
 			newClockMoveIcon.setAttribute('viewBox','0 0 10 10');
 			newClockMoveIcon.setAttribute('height','2vh');
 			newClockMoveIcon.setAttribute('width','2vh');
 			newClockMoveIcon.addEventListener('mousedown',handlers.pickupClock.bind(newClockDiv),false);
 			newClockMoveSpan.appendChild(newClockMoveIcon);
-
+			
 			var newClockMoveIconBackdrop = document.createElementNS('http://www.w3.org/2000/svg','rect');
 			newClockMoveIconBackdrop.setAttribute('x',0);
 			newClockMoveIconBackdrop.setAttribute('y',0);
@@ -60,7 +60,7 @@ var view = {
 			newClockMoveIconBackdrop.setAttribute('rx',2);
 			newClockMoveIconBackdrop.setAttribute('fill','gray');
 			newClockMoveIcon.appendChild(newClockMoveIconBackdrop);
-
+			
 			var newClockMoveIconArrows = document.createElementNS('http://www.w3.org/2000/svg','path');
 			newClockMoveIconArrows.setAttribute('stroke','#333333');
 			newClockMoveIconArrows.setAttributeNS(null,'d','m 5,1 l-1,1 h1 v3 h-3 v-1 l-1,1 l1,1 v-1 h3 v3 h-1 l1,1 l1,-1 h-1 v-3 h3 v1 l1,-1 l-1,-1 v1 h-3 v-3 h1 l-1,-1 z');
@@ -71,29 +71,50 @@ var view = {
 			newClockDiv.appendChild(newClockSVGDiv);
 
 			var newClockSVG  = document.createElementNS('http://www.w3.org/2000/svg','svg');
-			newClockSVG.setAttribute('viewBox','0 0 100 100');
-			newClockSVG.setAttribute('height','10vh');
-			newClockSVG.setAttribute('width','10vh');
 			newClockSVG.className = 'clockSVG';
 			newClockSVGDiv.appendChild(newClockSVG);
 
-			var segments = [
+			var style = document.getElementById('clockStyleSelect').value;
+			var segments = [];
+			var strokeWidth = 1;
+			if (style === 'Apocalypse World') {
+				segments = [
+					'M52.502,47.506h44.935C96.175,23.302,76.706,3.833,52.502,2.571V47.506z',
+					'M52.502,52.507v44.935c24.204-1.262,43.673-20.73,44.935-44.935H52.502z',
+					'M2.567,52.507C3.829,76.711,23.298,96.18,47.502,97.441l0.001-44.935H2.567z',
+					'M7.685,28.438c-3.027,5.938-4.775,12.446-5.123,19.069l38.115-0.001C19.955,35.543,11.321,30.556,7.685,28.438z',
+					'M10.169,24.119l33.008,19.057L26.748,14.72c-1.162-2.012-2.005-3.473-2.618-4.548C18.544,13.8,13.78,18.559,10.169,24.119z',
+					'M28.452,7.668l19.056,33.007V2.571C40.859,2.92,34.355,4.66,28.452,7.668z',
+				];
+				newClockSVGDiv.style.cssFloat = 'left';
+				newClockSVG.setAttribute('viewBox','0 0 100 100');
+				newClockSVG.setAttribute('height','10vh');
+				newClockSVG.setAttribute('width','10vh');
+				strokeWidth = 1.5;
+			} else if (style === 'Sprawl') {
+				segments = [
+					'M22.642,5.774 c-0.062,0.273-0.333,0.495-0.607,0.495H0.396c-0.273,0-0.444-0.222-0.383-0.495l1.194-5.279C1.268,0.222,1.54,0,1.813,0h21.639c0.274,0,0.445,0.222,0.383,0.495L22.642,5.774z',
+					'M46.699,5.774 c-0.061,0.273-0.332,0.495-0.606,0.495H24.454c-0.274,0-0.445-0.222-0.384-0.495l1.194-5.279C25.326,0.222,25.597,0,25.871,0H47.51c0.274,0,0.444,0.222,0.383,0.495L46.699,5.774z',
+					'M70.756,5.774 c-0.061,0.273-0.333,0.495-0.605,0.495H48.51c-0.272,0-0.444-0.222-0.383-0.495l1.194-5.279C49.383,0.222,49.655,0,49.929,0h21.638c0.274,0,0.444,0.222,0.383,0.495L70.756,5.774z',
+					'M80.137,5.774 c-0.062,0.273-0.332,0.495-0.606,0.495h-6.93c-0.272,0-0.444-0.222-0.383-0.495l1.194-5.279C73.473,0.222,73.744,0,74.018,0h6.931c0.272,0,0.443,0.222,0.382,0.495L80.137,5.774z',
+					'M89.438,5.774 c-0.062,0.273-0.332,0.495-0.606,0.495h-6.929c-0.273,0-0.445-0.222-0.384-0.495l1.193-5.279C82.774,0.222,83.047,0,83.319,0h6.93c0.274,0,0.444,0.222,0.383,0.495L89.438,5.774z',
+					'M98.74,5.774 c-0.061,0.273-0.333,0.495-0.605,0.495h-6.93c-0.273,0-0.443-0.222-0.384-0.495l1.193-5.279C92.078,0.222,92.349,0,92.623,0h6.928c0.274,0,0.446,0.222,0.383,0.495L98.74,5.774z',
+				];
+				newClockSVG.setAttribute('viewBox','-5 0 105 10');
+				newClockSVG.setAttribute('height','3vh');
+				newClockSVG.setAttribute('width','28vh');
+				strokeWidth = 0.5;
+			} else if (style === 'Blades in the Dark') {
+			} else if (style === 'MASHed') {
+			};
 
-				'M52.502,47.506h44.935C96.175,23.302,76.706,3.833,52.502,2.571V47.506z',
-				'M52.502,52.507v44.935c24.204-1.262,43.673-20.73,44.935-44.935H52.502z',
-				'M2.567,52.507C3.829,76.711,23.298,96.18,47.502,97.441l0.001-44.935H2.567z',
-				'M7.685,28.438c-3.027,5.938-4.775,12.446-5.123,19.069l38.115-0.001C19.955,35.543,11.321,30.556,7.685,28.438z',
-				'M10.169,24.119l33.008,19.057L26.748,14.72c-1.162-2.012-2.005-3.473-2.618-4.548C18.544,13.8,13.78,18.559,10.169,24.119z',
-				'M28.452,7.668l19.056,33.007V2.571C40.859,2.92,34.355,4.66,28.452,7.668z',
-
-			];
 
 			for (s in segments) {
 				var fill = clocks[i].colors.empty;
 				if (clocks[i].currentSegment > s) {fill = clocks[i].colors.fill};
 				var segment = document.createElementNS('http://www.w3.org/2000/svg','path');
-				segment.setAttribute('stroke','black');
-				segment.setAttribute('stroke-width','1');
+				segment.setAttribute('stroke',clocks[i].colors.stroke);
+				segment.setAttribute('stroke-width',strokeWidth);
 				segment.setAttribute('fill',fill);
 				segment.setAttributeNS(null,'d',segments[s]);
 				segment.setAttribute('onclick','handlers.segmentClick('+i+','+s+')');
@@ -124,7 +145,7 @@ var view = {
 			newClockAdvanceButton.className = 'newClockControlButton';
 			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
 			newClockControlsDiv.appendChild(newClockAdvanceButton);
-
+			
 			var newClockColorSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
 			newClockColorSVG.setAttribute('viewBox','0 0 10 10');
 			newClockColorSVG.setAttribute('height','1vh');
@@ -153,7 +174,7 @@ var view = {
 			rainbow.setAttribute('rx',2);
 			rainbow.setAttribute('fill','url(#rainbowGradient)');
 			newClockColorSVG.appendChild(rainbow);
-
+			
 			var newClockColorButton = document.createElement('button');
 			newClockColorButton.className = 'newClockControlButton';
 			newClockColorButton.setAttribute('onclick','handlers.displayColorPanel('+i+')');
@@ -258,6 +279,7 @@ var view = {
 
 		var colorInput = document.createElement('input');
 		colorInput.id = 'colorInput_'+clock;
+		colorInput.className = 'colorInput';
 		colorInput.setAttribute('type','color');
 		colorInput.setAttribute('value','#666666');
 		newClockSegmentViewDiv.appendChild(colorInput);
@@ -280,8 +302,10 @@ var view = {
 
 		if (red < 128 && green < 128 && blue < 128) {
 			clocks[clock].colors.text = 'white';
+			clocks[clock].colors.stroke = 'white';
 		} else {
 			clocks[clock].colors.text = 'black';
+			clocks[clock].colors.stroke = 'black';
 		};
 
 		red /= 2;
