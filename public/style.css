@@ -14,20 +14,26 @@ body {
 	width: 100%;
 }
 
+#header h1 {
+	font-size: 4vh;
+	margin-top: 1vh;
+}
+
 #clocksDiv {
 	overflow: scroll;
 	height: 80vh;
 }
 
 .clockDiv {
-	height: 150px;
-	width: 300px;
+	height: 15vh;
+	width: 30vh;
 	clear: both;
 	background-color: gray;
 }
 
 h3 {
-	padding: 0.5vw;
+	padding: 0.5vh;
+	font-size: 2vh;
 	margin: 0;
 	background-color: black;
 	color: white;
@@ -39,8 +45,6 @@ h3 {
 
 .clockSVGDiv {
 	float: left;
-	height: 15vh;
-	width: 15vh;
 	margin: 1vh;
 }
 
@@ -48,17 +52,26 @@ h3 {
 }
 
 .newClockLabelCurrentlyP {
-	font-size: 0.5em;
+	font-size: 1.2vh;
 	margin-bottom: 0;
 }
 
 .newClockLabelP {
 	margin-top: 0;
-	margin-bottom: 0.5em;
+	margin-bottom: 1vh;
+	font-size: 2vh;
 }
 
 .newClockSegmentViewDiv {
 	margin-top: 0.5vh;
+}
+
+.newClockRewindButton {
+	height: 1vh;
+}
+
+.newClockAdvanceButton {
+	height: 1vh;
 }
 
 #controlsDiv {

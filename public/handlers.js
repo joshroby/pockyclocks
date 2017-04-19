@@ -1,7 +1,13 @@
 var handlers = {
 
-	newClock: function() {
-		var newClock = new Clock();
+	newClock: function(type) {
+		var newClock = new Clock(type);
+		view.refreshClocks();
+	},
+	
+	addHarmClock: function() {
+		type = document.getElementById('addHarmClockSelect').value;
+		var newClock = new Clock(type);
 		view.refreshClocks();
 	},
 
