@@ -5,6 +5,13 @@ function Clock(name) {
 	if (name == undefined) {name = 'Clock #' + clocks.length;};
 
 	this.name = name;
+	
+	this.format = 'classic';
+	
+	this.priority = 'active';
+	
+	this.fillColor = 'black';
+	this.emptyColor = 'white';
 
 	this.currentSegment = 0;
 	

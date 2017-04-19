@@ -55,15 +55,15 @@ var view = {
 			newClockLabelDiv.innerHTML = "Currently: " + clocks[i].labels[clocks[i].currentSegment];
 			newClockControlsDiv.appendChild(newClockLabelDiv);
 			
-			var newClockAdvanceButton = document.createElement('button');
-			newClockAdvanceButton.innerHTML = '+';
-			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
-			newClockControlsDiv.appendChild(newClockAdvanceButton);
-			
 			var newClockRewindButton = document.createElement('button');
 			newClockRewindButton.innerHTML = '-';
 			newClockRewindButton.setAttribute('onclick','handlers.rewindClock('+i+')');
 			newClockControlsDiv.appendChild(newClockRewindButton);
+			
+			var newClockAdvanceButton = document.createElement('button');
+			newClockAdvanceButton.innerHTML = '+';
+			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
+			newClockControlsDiv.appendChild(newClockAdvanceButton);
 			
 			clocksDiv.appendChild(newClockDiv);
 		};
