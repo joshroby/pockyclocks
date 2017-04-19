@@ -2,10 +2,10 @@
 
 one:
   clock: one
-  pos: MyString
-  name: MyString
+  pos: 0
+  name: Bloody
 
 two:
   clock: two
-  pos: MyString
-  name: MyString
+  pos: 0
+  name: Harmed

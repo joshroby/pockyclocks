@@ -2,20 +2,20 @@
 
 one:
   room: one
-  name: MyString
-  posx: 
-  posy: 
-  segment: 
-  priority: MyString
-  fillColor: MyString
-  emptyColor: MyString
+  name: Clock One
+  posx: 10
+  posy: 10
+  segment:
+  priority: active
+  fill_color: black
+  empty_color: white
 
 two:
   room: two
-  name: MyString
-  posx: 
-  posy: 
-  segment: 
-  priority: MyString
-  fillColor: MyString
-  emptyColor: MyString
+  name: Clock Two
+  posx: 20
+  posy: 20
+  segment:
+  priority: active
+  fill_color: black
+  empty_color: white
