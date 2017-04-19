@@ -4,6 +4,10 @@
 	padding: 1vh;
 }
 
+.titleUpdate {
+	display: none;
+}
+
 .clockSVGDiv {
 	float: left;
 }

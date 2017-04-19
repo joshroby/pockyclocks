@@ -33,6 +33,14 @@ function Clock(name) {
 		this.currentSegment = Math.max(this.currentSegment - 1,0)
 	};
 	
+	this.updateLabel = function(segment,newLabel) {
+		this.labels[segment] = newLabel;
+	};
+	
+	this.updateName = function(newName) {
+		this.name = newName;
+	};
+	
 	clocks.push(this);
 	
 };

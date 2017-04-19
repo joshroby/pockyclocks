@@ -8,10 +8,29 @@ var view = {
 		for (i in clocks) {
 			var newClockDiv = document.createElement('div');
 			newClockDiv.className = 'clockDiv';
+			newClockDiv.id = 'clockDiv_' + i;
 			
 			var newClockTitle = document.createElement('h3');
-			newClockTitle.innerHTML = clocks[i].name;
 			newClockDiv.appendChild(newClockTitle);
+			
+			var newClockTitleName = document.createElement('span');
+			newClockTitleName.id = 'titleName_'+i;
+			newClockTitleName.innerHTML = clocks[i].name;
+			newClockTitleName.setAttribute('onclick','handlers.revealTitleUpdate('+i+')');
+			newClockTitle.appendChild(newClockTitleName);
+			
+			var newClockTitleUpdate = document.createElement('span');
+			newClockTitleUpdate.className = 'titleUpdate';
+			newClockTitleUpdate.id = 'titleUpdate_'+i;
+			newClockTitle.appendChild(newClockTitleUpdate);
+			var newClockTitleUpdateInput = document.createElement('input');
+			newClockTitleUpdateInput.id = 'newClockTitleUpdateInput_'+i;
+			newClockTitleUpdateInput.setAttribute('type','text');
+			newClockTitleUpdate.appendChild(newClockTitleUpdateInput);
+			var newClockTitleUpdateButton = document.createElement('button');
+			newClockTitleUpdateButton.innerHTML = 'update';
+			newClockTitleUpdateButton.setAttribute('onclick','handlers.updateTitle('+i+')');
+			newClockTitleUpdate.appendChild(newClockTitleUpdateButton);
 			
 			var newClockSVGDiv = document.createElement('div');
 			newClockSVGDiv.className = 'clockSVGDiv';
@@ -43,7 +62,7 @@ var view = {
 				segment.setAttribute('stroke-width','1');
 				segment.setAttribute('fill',fill);
 				segment.setAttributeNS(null,'d',segments[s]);
-				segment.id = 'clock_'+i+'_segment_'+s;
+				segment.setAttribute('onclick','handlers.segmentClick('+i+','+s+')');
 				newClockSVG.appendChild(segment);
 			};
 			
@@ -65,9 +84,35 @@ var view = {
 			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
 			newClockControlsDiv.appendChild(newClockAdvanceButton);
 			
+			var newClockSegmentViewDiv = document.createElement('div');
+			newClockSegmentViewDiv.id = 'clockSegmentViewDiv_' + i;
+			newClockControlsDiv.appendChild(newClockSegmentViewDiv);
+			
 			clocksDiv.appendChild(newClockDiv);
 		};
 	
+	},
+	
+	viewSegment: function(clock,segment) {
+		var clockSegmentViewDiv = document.getElementById('clockSegmentViewDiv_'+clock);
+		clockSegmentViewDiv.innerHTML = '';
+		
+		var labelInput = document.createElement('input');
+		labelInput.setAttribute('type','text');
+		labelInput.setAttribute('value',clocks[clock].labels[segment]);
+		labelInput.id = 'labelInput_'+clock;
+		
+		var updateLabelButton = document.createElement('button');
+		updateLabelButton.setAttribute('onclick','handlers.updateLabel('+clock+','+segment+')');
+		updateLabelButton.innerHTML = 'update';
+		
+		var dismissLabelButton = document.createElement('button');
+		dismissLabelButton.setAttribute('onclick','handlers.dismissLabelUpdate('+clock+')');
+		dismissLabelButton.innerHTML = 'dismiss';
+		
+		clockSegmentViewDiv.appendChild(labelInput);
+		clockSegmentViewDiv.appendChild(updateLabelButton);
+		clockSegmentViewDiv.appendChild(dismissLabelButton);
 	},
 
 };
