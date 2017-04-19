@@ -1,0 +1,18 @@
+.clockDiv {
+	height: 10vh;
+	clear: both;
+	padding: 1vh;
+}
+
+.clockSVGDiv {
+	float: left;
+}
+
+.clockControls {
+	height: 100%;
+}
+
+#controlsDiv {
+	clear: both;
+	padding: 3vh;
+}
