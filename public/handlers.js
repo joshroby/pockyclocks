@@ -4,7 +4,7 @@ var handlers = {
 		var newClock = new Clock(type);
 		view.refreshClocks();
 	},
-	
+
 	addHarmClock: function() {
 		type = document.getElementById('addHarmClockSelect').value;
 		var newClock = new Clock(type);
