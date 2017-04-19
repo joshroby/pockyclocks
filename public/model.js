@@ -2,8 +2,6 @@ var clocks = [];
 
 function Clock(type) {
 
-	console.log(type);
-
 	if (type == undefined) {
 		this.name = 'Click Here to Rename';
 		this.labels = [
@@ -82,11 +80,27 @@ function Clock(type) {
 			"Target evacuates"
 		];
 	};
-
-	this.priority = 'active';
-
-	this.fillColor = 'black';
-	this.emptyColor = 'white';
+	
+	this.position = {
+		x: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
+		y: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
+	};
+	
+	this.colors = {
+		fill: 'black',
+		empty: 'white',
+		background: 'gray',
+		headerBackground: 'black',
+		header: 'white',
+		text: 'black',
+	};
+	
+// 	for (i in this.colors) {
+// 			var red = Math.random() * 255 << 0;
+// 			var green = Math.random() * 255  << 0;
+// 			var blue = Math.random() * 255 << 0;
+// 			this.colors[i] = "#" + ("0" + red.toString(16)).substr(-2) + ("0" + green.toString(16)).substr(-2) + ("0" + blue.toString(16)).substr(-2);
+// 	};
 
 	this.currentSegment = 0;
 

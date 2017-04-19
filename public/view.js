@@ -1,5 +1,7 @@
 var view = {
 
+	focus: {},
+
 	refreshClocks: function() {
 
 		var clocksDiv = document.getElementById('clocksDiv')
@@ -9,8 +11,14 @@ var view = {
 			var newClockDiv = document.createElement('div');
 			newClockDiv.className = 'clockDiv';
 			newClockDiv.id = 'clockDiv_' + i;
+			newClockDiv.style.top = clocks[i].position.y + 'px';
+			newClockDiv.style.left = clocks[i].position.x + 'px';
+			newClockDiv.style.backgroundColor = clocks[i].colors.background;
+			newClockDiv.style.color = clocks[i].colors.text;
 
 			var newClockTitle = document.createElement('h3');
+			newClockTitle.style.backgroundColor = clocks[i].colors.headerBackground;
+			newClockTitle.style.color = clocks[i].colors.header;
 			newClockDiv.appendChild(newClockTitle);
 
 			var newClockTitleName = document.createElement('span');
@@ -31,6 +39,32 @@ var view = {
 			newClockTitleUpdateButton.innerHTML = 'update';
 			newClockTitleUpdateButton.setAttribute('onclick','handlers.updateTitle('+i+')');
 			newClockTitleUpdate.appendChild(newClockTitleUpdateButton);
+			
+			var newClockMoveSpan = document.createElement('span');
+			newClockMoveSpan.className = 'clockMoveSpan';
+			newClockTitle.appendChild(newClockMoveSpan);
+			
+			var newClockMoveIcon = document.createElementNS('http://www.w3.org/2000/svg','svg');
+			newClockMoveIcon.setAttribute('viewBox','0 0 10 10');
+			newClockMoveIcon.setAttribute('height','2vh');
+			newClockMoveIcon.setAttribute('width','2vh');
+			newClockMoveIcon.addEventListener('mousedown',handlers.pickupClock.bind(newClockDiv),false);
+			newClockMoveSpan.appendChild(newClockMoveIcon);
+			
+			var newClockMoveIconBackdrop = document.createElementNS('http://www.w3.org/2000/svg','rect');
+			newClockMoveIconBackdrop.setAttribute('x',0);
+			newClockMoveIconBackdrop.setAttribute('y',0);
+			newClockMoveIconBackdrop.setAttribute('width',10);
+			newClockMoveIconBackdrop.setAttribute('height',10);
+			newClockMoveIconBackdrop.setAttribute('rx',2);
+			newClockMoveIconBackdrop.setAttribute('rx',2);
+			newClockMoveIconBackdrop.setAttribute('fill','gray');
+			newClockMoveIcon.appendChild(newClockMoveIconBackdrop);
+			
+			var newClockMoveIconArrows = document.createElementNS('http://www.w3.org/2000/svg','path');
+			newClockMoveIconArrows.setAttribute('stroke','#333333');
+			newClockMoveIconArrows.setAttributeNS(null,'d','m 5,1 l-1,1 h1 v3 h-3 v-1 l-1,1 l1,1 v-1 h3 v3 h-1 l1,1 l1,-1 h-1 v-3 h3 v1 l1,-1 l-1,-1 v1 h-3 v-3 h1 l-1,-1 z');
+			newClockMoveIcon.appendChild(newClockMoveIconArrows);
 
 			var newClockSVGDiv = document.createElement('div');
 			newClockSVGDiv.className = 'clockSVGDiv';
@@ -55,8 +89,8 @@ var view = {
 			];
 
 			for (s in segments) {
-				var fill = 'white';
-				if (clocks[i].currentSegment > s) {fill = 'black'};
+				var fill = clocks[i].colors.empty;
+				if (clocks[i].currentSegment > s) {fill = clocks[i].colors.fill};
 				var segment = document.createElementNS('http://www.w3.org/2000/svg','path');
 				segment.setAttribute('stroke','black');
 				segment.setAttribute('stroke-width','1');
@@ -81,15 +115,50 @@ var view = {
 
 			var newClockRewindButton = document.createElement('button');
 			newClockRewindButton.innerHTML = '-';
-			newClockRewindButton.className = 'newClockRewindButton';
+			newClockRewindButton.className = 'newClockControlButton';
 			newClockRewindButton.setAttribute('onclick','handlers.rewindClock('+i+')');
 			newClockControlsDiv.appendChild(newClockRewindButton);
 
 			var newClockAdvanceButton = document.createElement('button');
 			newClockAdvanceButton.innerHTML = '+';
-			newClockAdvanceButton.className = 'newClockAdvanceButton';
+			newClockAdvanceButton.className = 'newClockControlButton';
 			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
 			newClockControlsDiv.appendChild(newClockAdvanceButton);
+			
+			var newClockColorSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
+			newClockColorSVG.setAttribute('viewBox','0 0 10 10');
+			newClockColorSVG.setAttribute('height','1vh');
+			newClockColorSVG.setAttribute('width','1vh');
+			var rainbowGradient = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
+			rainbowGradient.setAttribute('id','rainbowGradient');
+			newClockColorSVG.appendChild(rainbowGradient);
+			var redStop = document.createElementNS('http://www.w3.org/2000/svg','stop');
+			redStop.setAttribute('offset','0%');
+			redStop.setAttribute('stop-color','red');
+			rainbowGradient.appendChild(redStop);
+			var yellowStop = document.createElementNS('http://www.w3.org/2000/svg','stop');
+			yellowStop.setAttribute('offset','50%');
+			yellowStop.setAttribute('stop-color','yellow');
+			rainbowGradient.appendChild(yellowStop);
+			var blueStop = document.createElementNS('http://www.w3.org/2000/svg','stop');
+			blueStop.setAttribute('offset','100%');
+			blueStop.setAttribute('stop-color','blue');
+			rainbowGradient.appendChild(blueStop);
+			var rainbow = document.createElementNS('http://www.w3.org/2000/svg','rect');
+			rainbow.setAttribute('x',0);
+			rainbow.setAttribute('y',0);
+			rainbow.setAttribute('width',10);
+			rainbow.setAttribute('height',10);
+			rainbow.setAttribute('rx',2);
+			rainbow.setAttribute('rx',2);
+			rainbow.setAttribute('fill','url(#rainbowGradient)');
+			newClockColorSVG.appendChild(rainbow);
+			
+			var newClockColorButton = document.createElement('button');
+			newClockColorButton.className = 'newClockControlButton';
+			newClockColorButton.appendChild(newClockColorSVG);
+			console.log(newClockColorSVG);
+			newClockControlsDiv.appendChild(newClockColorButton);
 
 			var newClockSegmentViewDiv = document.createElement('div');
 			newClockSegmentViewDiv.className = 'newClockSegmentViewDiv';
@@ -131,7 +200,6 @@ var view = {
 		var segment = document.getElementById('clockDiv_'+clock).childNodes[1].childNodes[0].childNodes[segment-1];
 		segment.setAttribute('stroke','red');
 		segment.setAttribute('stroke-width',3);
-		console.log(segment);
 	},
 
 };

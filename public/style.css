@@ -22,25 +22,32 @@ body {
 #clocksDiv {
 	overflow: scroll;
 	height: 80vh;
+	position: relative;
 }
 
 .clockDiv {
 	height: 15vh;
 	width: 30vh;
 	clear: both;
-	background-color: gray;
+	position: absolute;
 }
 
 h3 {
 	padding: 0.5vh;
 	font-size: 2vh;
 	margin: 0;
+/* 
 	background-color: black;
 	color: white;
+ */
 }
 
 .titleUpdate {
 	display: none;
+}
+
+.clockMoveSpan {
+	float: right;
 }
 
 .clockSVGDiv {
@@ -64,13 +71,10 @@ h3 {
 
 .newClockSegmentViewDiv {
 	margin-top: 0.5vh;
+	background-color: gray;
 }
 
-.newClockRewindButton {
-	height: 1vh;
-}
-
-.newClockAdvanceButton {
+.newClockControlButton {
 	height: 1vh;
 }
 
