@@ -1,18 +1,19 @@
 Requirements for Pockyclocks:
 
-1. GMs can start a Pockyclock space.
-2. Pockyclock spaces are publically accessible.
-3. A Pockyclock space can have at least twelve different countdown clocks.
-4. A countdown clock has a title.
-5. A countdown clock has optional notes.
-6. A countdown clock can be up to eight segments.
-7. GMs can fill in segments of a countdown clock, also known as Advancing.
-8. GMs can remove filled-in segments of countdown clocks, also known as Rewinding.
-9. Pockyclock spaces have a access code that can be shared.
-10. Any user with an access clock can see a Pockyclock space.
-11. A countdown clock can be active, complete, or unneeded.
-12. A Pockyclock space will show active countdown clocks first.
-13. Default countdown clock graphics are as presented in stock Apocalypse world.
-14. Pockyclock spaces can be given a user-friendly name.
-15. Pockyclock spaces may incorporate other GM or game tools such as bookmarks or dice rollers or notes.
-16. Countdown clocks have the option to utilize Pocky brand snack food sticks as part of their graphics, ideally clock hands.
+1. A Pockyclock space can have at least twelve different countdown clocks.
+2. A countdown clock has a title.
+3. A countdown clock has optional notes.
+4. A countdown clock can be up to eight segments.
+5. GMs can fill in segments of a countdown clock, also known as Advancing.
+6. GMs can remove filled-in segments of countdown clocks, also known as Rewinding.
+7. A countdown clock can be active, complete, or unneeded.
+8. A Pockyclock space will show active countdown clocks first.
+9. Default countdown clock graphics are as presented in stock Apocalypse world.
+10. Countdown clocks have the option to utilize Pocky brand snack food sticks as part of their graphics, ideally clock hands.
+
+11. GMs can start a Pockyclock space.
+12. Pockyclock spaces are publically accessible.
+13. Pockyclock spaces have a access code that can be shared.
+14. Any user with an access clock can see a Pockyclock space.
+15. Pockyclock spaces can be given a user-friendly name.
+16. Pockyclock spaces may incorporate other GM or game tools such as bookmarks or dice rollers or notes.
