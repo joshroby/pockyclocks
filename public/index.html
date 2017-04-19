@@ -29,10 +29,12 @@
 			</select>
 			<button onclick='handlers.newClock("Legwork")'>Add a Legwork Clock</button>
 			<button onclick='handlers.newClock("Mission")'>Add a Mission Clock</button>
-			<select>
+			<select id='clockStyleSelect' onchange='view.refreshClocks()'>
 				<option selected>Apocalypse World</option>
-				<option disabled>Sprawl</option>
-				<option disabled>Pocky(tm)</option>
+				<option >Sprawl</option>
+				<option disabled>Blades in the Dark</option>
+				<option disabled>MASHed</option>
+				<option disabled>Pocky Biscuit Sticks</option>
 			</select>
 		</div>
 

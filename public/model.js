@@ -80,21 +80,23 @@ function Clock(type) {
 			"Target evacuates"
 		];
 	};
-
+	
 	this.position = {
 		x: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
 		y: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
 	};
-
+	
 	this.colors = {
 		fill: 'black',
 		empty: 'white',
+		stroke: 'black',
 		background: 'gray',
 		headerBackground: 'black',
 		header: 'white',
 		text: 'black',
 	};
-
+	
+// 	Random Colors (they look terrible!)
 // 	for (i in this.colors) {
 // 			var red = Math.random() * 255 << 0;
 // 			var green = Math.random() * 255  << 0;

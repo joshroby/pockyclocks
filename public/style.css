@@ -37,10 +37,6 @@ h3 {
 	padding: 0.5vh;
 	font-size: 2vh;
 	margin: 0;
-/*
-	background-color: black;
-	color: white;
- */
 }
 
 .titleUpdate {
@@ -52,11 +48,11 @@ h3 {
 }
 
 .clockSVGDiv {
-	float: left;
-	margin: 1vh;
+	margin: 0.5vh;
 }
 
 .clockControls {
+	margin: 0.5vh;
 }
 
 .newClockLabelCurrentlyP {
@@ -80,6 +76,10 @@ h3 {
 
 .dumbColorSelectButton {
 	height: 1vh;
+}
+
+.colorInput {
+	max-width: 5vh;
 }
 
 #controlsDiv {
