@@ -38,8 +38,8 @@ var view = {
 
 			var newClockSVG  = document.createElementNS('http://www.w3.org/2000/svg','svg');
 			newClockSVG.setAttribute('viewBox','0 0 100 100');
-			newClockSVG.setAttribute('height',100);
-			newClockSVG.setAttribute('width',100);
+			newClockSVG.setAttribute('height','10vh');
+			newClockSVG.setAttribute('width','10vh');
 			newClockSVG.className = 'clockSVG';
 			newClockSVGDiv.appendChild(newClockSVG);
 
@@ -81,11 +81,13 @@ var view = {
 
 			var newClockRewindButton = document.createElement('button');
 			newClockRewindButton.innerHTML = '-';
+			newClockRewindButton.className = 'newClockRewindButton';
 			newClockRewindButton.setAttribute('onclick','handlers.rewindClock('+i+')');
 			newClockControlsDiv.appendChild(newClockRewindButton);
 
 			var newClockAdvanceButton = document.createElement('button');
 			newClockAdvanceButton.innerHTML = '+';
+			newClockAdvanceButton.className = 'newClockAdvanceButton';
 			newClockAdvanceButton.setAttribute('onclick','handlers.advanceClock('+i+')');
 			newClockControlsDiv.appendChild(newClockAdvanceButton);
 
