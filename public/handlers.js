@@ -4,7 +4,7 @@ var handlers = {
 		var newClock = new Clock(type);
 		view.refreshClocks();
 	},
-
+	
 	addHarmClock: function() {
 		type = document.getElementById('addHarmClockSelect').value;
 		var newClock = new Clock(type);
@@ -46,12 +46,12 @@ var handlers = {
 		if (newName !== '') {clocks[clock].updateName(newName);};
 		view.refreshClocks();
 	},
-
+	
 	pickupClock: function(e) {
 		view.focus.clock = this;
 		window.addEventListener('mousemove',handlers.moveClock,true);
 	},
-
+	
 	moveClock: function(e) {
 		var clockX = e.x - 0.3 * document.documentElement.clientHeight;
 		var clockY = e.y - 0.1 * document.documentElement.clientHeight;
@@ -61,23 +61,23 @@ var handlers = {
 		clocks[clock].position.x = clockX;
 		clocks[clock].position.y = clockY;
 	},
-
+	
 	dropClock: function(clock) {
 		window.removeEventListener('mousemove',handlers.moveClock,true);
 	},
-
+	
 	displayColorPanel: function(clock) {
 		view.displayColorPanel(clock);
 	},
-
+	
 	updateColorInput: function(clock,color) {
 		document.getElementById('colorInput_'+clock).value = color;
 	},
-
+	
 	updateColor: function(clock) {
 		view.updateClockColor(clock,document.getElementById('colorInput_'+clock).value);
 	},
-
+	
 };
 
 window.addEventListener('mouseup',handlers.dropClock,false);

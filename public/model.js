@@ -1,19 +1,10 @@
 var clocks = [];
 
 function Clock(type) {
+	
+	var style = document.getElementById('clockStyleSelect').value;
 
-	if (type == undefined) {
-		this.name = 'Click Here to Rename';
-		this.labels = [
-			"Noon",
-			"3 o'clock",
-			"6 o'clock",
-			"9 o'clock",
-			"10 o'clock",
-			"11 o'clock",
-			"midnight!"
-		];
-	} else if (type == "PCHarm") {
+	if (type == "PCHarm") {
 		this.name = 'Click to name PC';
 		this.labels = [
 			"Unhurt",
@@ -79,13 +70,48 @@ function Clock(type) {
 			"Target plans evacuation",
 			"Target evacuates"
 		];
+	} else if (style == "Apocalypse World") {
+		this.name = 'Click Here to Rename';
+		this.labels = [
+			"Noon",
+			"3 o'clock",
+			"6 o'clock",
+			"9 o'clock",
+			"10 o'clock",
+			"11 o'clock",
+			"midnight!"
+		];
+	} else if (style == "Sprawl") {
+		this.name = 'Click Here to Rename';
+		this.labels = [
+			"12:00",
+			"15:00",
+			"18:00",
+			"21:00",
+			"22:00",
+			"23:00",
+			"00:00"
+		];
+	} else if (style == "Blades in the Dark") {
+		this.name = 'Click Here to Rename';
+		this.labels = [
+			"8 segments left",
+			"7 segments left",
+			"6 segments left",
+			"5 segments left",
+			"4 segments left",
+			"3 segments left",
+			"2 segments left",
+			"1 segments left",
+			"Completed!",
+		];
 	};
-
+	
 	this.position = {
 		x: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
 		y: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
 	};
-
+	
 	this.colors = {
 		fill: 'black',
 		empty: 'white',
@@ -95,7 +121,7 @@ function Clock(type) {
 		header: 'white',
 		text: 'black',
 	};
-
+	
 // 	Random Colors (they look terrible!)
 // 	for (i in this.colors) {
 // 			var red = Math.random() * 255 << 0;

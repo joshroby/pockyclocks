@@ -68,10 +68,12 @@ h3 {
 
 .newClockSegmentViewDiv {
 	margin-top: 0.5vh;
+	text-align: right;
 }
 
 .newClockControlButton {
-	height: 1.2vh;
+	height: 3vh;
+/* 	padding: 0; */
 }
 
 .dumbColorSelectButton {
