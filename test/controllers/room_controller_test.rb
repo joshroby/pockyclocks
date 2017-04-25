@@ -3,14 +3,16 @@ require 'test_helper'
 class RoomControllerTest < ActionDispatch::IntegrationTest
   test "should get show" do
     get url_for(:controller => :room, :action => :show, :name => "one")
+
     assert_response :success
+    assert_equal "Clock One", JSON.parse(response.body).dig("clocks", 0, "name")
   end
 
   test "should get create" do
     put url_for(:controller => :room, :action => :show, :name => "three"), params: {
       clocks: [
         {
-          name: "three",
+          name: "clock three",
           position: {x:1, y:3},
           colors: {
             fill: "black", empty:"white", background: "teal", header:
@@ -24,6 +26,9 @@ class RoomControllerTest < ActionDispatch::IntegrationTest
       ]
     }
     assert_response :success
-  end
 
+    clock = Clock.where(name: "clock three").first
+    assert_not_nil clock
+    assert_equal "chucknorris", clock.text_color
+  end
 end

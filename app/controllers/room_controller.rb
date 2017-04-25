@@ -34,7 +34,7 @@ class RoomController < ApplicationController
       name: room.name,
       clocks: room.clocks.map do |clock|
         {
-          name: name,
+          name: clock.name,
           position: {
             x: clock.posx,
             y: clock.posy

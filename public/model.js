@@ -123,5 +123,4 @@ function Clock(type) {
 	};
 
 	clocks.push(this);
-
 };

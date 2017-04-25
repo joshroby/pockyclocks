@@ -1,13 +1,21 @@
 var handlers = {
+  roomNameSet: function(ev) {
+    var val = ev.target.value;
+    if (val != "") {
+      startSync(val)
+    }
+  },
 
 	newClock: function(type) {
 		var newClock = new Clock(type);
+    handlers.sendRoom();
 		view.refreshClocks();
 	},
 
 	addHarmClock: function() {
 		type = document.getElementById('addHarmClockSelect').value;
 		var newClock = new Clock(type);
+    handlers.sendRoom();
 		view.refreshClocks();
 	},
 
@@ -78,6 +86,71 @@ var handlers = {
 		view.updateClockColor(clock,document.getElementById('colorInput_'+clock).value);
 	},
 
+  loadRoom: function(room) {
+    clocks = room.clocks;
+		view.refreshClocks();
+  },
+
+  sendRoom: function() {
+  },
+
+  fetcherReadyChange: function(ev) {
+    var xhr = ev.target
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      switch (xhr.status) {
+      case 200:
+        handlers.loadRoom(xhr.response);
+        break;
+      case 404:
+        handlers.sendRoom();
+        break;
+      default:
+        console.log(xhr.status, xhr.responseText);
+      }
+    }
+  },
+
+  senderReadyChange: function(ev) {
+    var xhr = ev.target
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      switch (xhr.status) {
+      case 200:
+        break;
+      case 404:
+        break;
+      default:
+        console.log(xhr.status, xhr.responseText);
+      }
+    }
+  },
 };
 
-window.addEventListener('mouseup',handlers.dropClock,false);
+function startSync(name){
+  var fetcher = new XMLHttpRequest();
+  var sender = new XMLHttpRequest();
+
+  fetcher.open("GET", "/room/"+name);
+  fetcher.responseType = "json";
+  fetcher.onreadystatechange = handlers.fetcherReadyChange;
+  fetcher.send();
+
+  sender.open("PUT", "/room/"+name);
+  sender.onreadystatechange = handlers.senderReadyChange;
+  sender.setRequestHeader("Content-type", "application/json");
+
+  handlers.sendRoom = function() {
+    sender.send(JSON.stringify({clocks: clocks}));
+  };
+};
+
+
+(function(w){
+    w.roomSync = null;
+
+    function bindHandlers() {
+      document.getElementById('roomInput').addEventListener('blur', handlers.roomNameSet, true);
+    }
+
+    w.addEventListener('mouseup',handlers.dropClock,false);
+    w.addEventListener('load', bindHandlers);
+  }(window));
