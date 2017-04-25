@@ -6,6 +6,7 @@ class RoomControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_equal "Clock One", JSON.parse(response.body).dig("clocks", 0, "name")
+    assert_equal 2, JSON.parse(response.body).dig("clocks", 0, "currentSegment")
   end
 
   test "should get create" do

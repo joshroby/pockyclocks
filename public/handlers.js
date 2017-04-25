@@ -8,25 +8,25 @@ var handlers = {
 
 	newClock: function(type) {
 		var newClock = new Clock(type);
+    clocks.push(newClock);
     handlers.sendRoom();
-		view.refreshClocks();
 	},
 
 	addHarmClock: function() {
 		type = document.getElementById('addHarmClockSelect').value;
-		var newClock = new Clock(type);
+    var newClock = clockOfType(type);
+    clocks.push(newClock);
     handlers.sendRoom();
-		view.refreshClocks();
 	},
 
 	advanceClock: function(clock) {
 		clocks[clock].advance();
-		view.refreshClocks();
+    handlers.sendRoom();
 	},
 
 	rewindClock: function(clock) {
 		clocks[clock].rewind();
-		view.refreshClocks();
+    handlers.sendRoom();
 	},
 
 	segmentClick: function(clock,segment) {
@@ -36,7 +36,7 @@ var handlers = {
 	updateLabel: function(clock,segment) {
 		var newLabel = document.getElementById('labelInput_'+clock).value;
 		clocks[clock].updateLabel(segment,newLabel);
-		view.refreshClocks();
+    handlers.sendRoom();
 	},
 
 	revealTitleUpdate: function(clock) {
@@ -52,7 +52,7 @@ var handlers = {
 	updateTitle: function(clock) {
 		var newName = document.getElementById('newClockTitleUpdateInput_'+clock).value;
 		if (newName !== '') {clocks[clock].updateName(newName);};
-		view.refreshClocks();
+    handlers.sendRoom();
 	},
 
 	pickupClock: function(e) {
@@ -71,6 +71,7 @@ var handlers = {
 	},
 
 	dropClock: function(clock) {
+    handlers.sendRoom();
 		window.removeEventListener('mousemove',handlers.moveClock,true);
 	},
 
@@ -87,11 +88,11 @@ var handlers = {
 	},
 
   loadRoom: function(room) {
-    clocks = room.clocks;
 		view.refreshClocks();
   },
 
   sendRoom: function() {
+		view.refreshClocks();
   },
 
   fetcherReadyChange: function(ev) {
@@ -99,7 +100,12 @@ var handlers = {
     if (xhr.readyState == XMLHttpRequest.DONE) {
       switch (xhr.status) {
       case 200:
-        handlers.loadRoom(xhr.response);
+        clocks = xhr.response.clocks.map(function(data){
+            var c = new Clock();
+            c.setFrom(data);
+            return c;
+          });
+        view.refreshClocks();
         break;
       case 404:
         handlers.sendRoom();
@@ -126,19 +132,21 @@ var handlers = {
 };
 
 function startSync(name){
-  var fetcher = new XMLHttpRequest();
-  var sender = new XMLHttpRequest();
-
-  fetcher.open("GET", "/room/"+name);
-  fetcher.responseType = "json";
-  fetcher.onreadystatechange = handlers.fetcherReadyChange;
-  fetcher.send();
-
-  sender.open("PUT", "/room/"+name);
-  sender.onreadystatechange = handlers.senderReadyChange;
-  sender.setRequestHeader("Content-type", "application/json");
+  handlers.loadRoom = function() {
+    var fetcher = new XMLHttpRequest();
+    fetcher.open("GET", "/room/"+name);
+    fetcher.responseType = "json";
+    fetcher.onreadystatechange = handlers.fetcherReadyChange;
+    fetcher.send();
+  }
 
   handlers.sendRoom = function() {
+    var sender = new XMLHttpRequest();
+    view.refreshClocks();
+    sender.open("PUT", "/room/"+name);
+    sender.onreadystatechange = handlers.senderReadyChange;
+    sender.setRequestHeader("Content-type", "application/json");
+
     sender.send(JSON.stringify({clocks: clocks}));
   };
 };

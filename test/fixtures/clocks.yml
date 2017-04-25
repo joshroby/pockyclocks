@@ -5,7 +5,7 @@ one:
   name: Clock One
   posx: 10
   posy: 10
-  segment:
+  segment: 2
   priority: active
   fill_color: black
   empty_color: white
@@ -15,7 +15,7 @@ two:
   name: Clock Two
   posx: 20
   posy: 20
-  segment:
+  segment: 6
   priority: active
   fill_color: black
   empty_color: white
