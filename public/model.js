@@ -3,93 +3,84 @@ var clocks = [];
 function clockOfType(type) {
   clock = new Clock()
 
-  switch (type) {
-  case "PCHarm":
-    clock.name = 'Click to name PC';
-    clock.labels = [
-      "Unhurt",
-      "Less Serious, will heal",
-      "Less Serious, will heal",
-      "Less Serious, needs attention",
-      "More Serious, will deteriorate",
-      "More Serious, will deteriorate",
-      "Life has become untenable"
-    ];
-    break;
-  case "NPCHarm":
-    this.name = 'Click to name NPC';
-    this.labels = [
-      "Unhurt",
-      "Cosmetic Damage, Pain",
-      "Wounds, likely fatal",
-      "Terrible wounds, fatal",
-      "Immediately Fatal, mangling",
-      "Bodily Destructive",
-      "Chunky Salsa"
-    ];
-    break;
-  case "GangHarm":
-    this.name = 'Click to name Gang';
-    this.labels = [
-      "Fighting Ready",
-      "Injuries, some serious",
-      "Many injuries, some fatalities",
-      "Serious injuries, fatalities",
-      "Many fatalities",
-      "Few Survivors",
-      "No Survivors"
-    ];
-    break;
-  case "VehicleHarm":
-    this.name = 'Click to name Vehicle';
-    this.labels = [
-      "Undamaged",
-      "Cosmetic Damage, 0-harm through",
-      "Functional Damage, 1-harm through",
-      "Serious Damage, 2-harm through",
-      "Breakdown, 3-harm through",
-      "Total Destruction, full harm through",
-      "Total Destruction, full harm through",
-    ];
-    break;
-  case "Legwork":
-    this.name = 'Click to name Mission Legwork';
-    this.labels = [
-      "Everything's Cool",
-      "The team is making some noise",
-      "The target hears vague rumours",
-      "Target hears clear but unconfirmed rumors",
-      "Target has reliable intel about the run",
-      "Target has reliable intel about the team",
-      "The team is precisely identified."
-    ];
-    break;
-  case "Mission":
-    this.name = 'Click to name Mission Clock';
-    this.labels = [
-      "Everything's Cool",
-      "Target is wary and suspicious",
-      "Target is on edge and alerted",
-      "Target takes precautions",
-      "Target doubles down",
-      "Target plans evacuation",
-      "Target evacuates"
-    ];
-  };
-  return clock;
-}
-
-function Clock() {
-  this.name = 'Click Here to Rename';
-  this.labels = [
-    "Noon",
-    "3 o'clock",
-    "6 o'clock",
-    "9 o'clock",
-    "10 o'clock",
-    "11 o'clock",
-    "midnight!"
-  ];
+	if (type == undefined) {
+		this.name = 'Click Here to Rename';
+		this.labels = [
+			"Noon",
+			"3 o'clock",
+			"6 o'clock",
+			"9 o'clock",
+			"10 o'clock",
+			"11 o'clock",
+			"midnight!"
+		];
+	} else if (type == "PCHarm") {
+		this.name = 'Click to name PC';
+		this.labels = [
+			"Unhurt",
+			"Less Serious, will heal",
+			"Less Serious, will heal",
+			"Less Serious, needs attention",
+			"More Serious, will deteriorate",
+			"More Serious, will deteriorate",
+			"Life has become untenable"
+		];
+	} else if (type == "NPCHarm") {
+		this.name = 'Click to name NPC';
+		this.labels = [
+			"Unhurt",
+			"Cosmetic Damage, Pain",
+			"Wounds, likely fatal",
+			"Terrible wounds, fatal",
+			"Immediately Fatal, mangling",
+			"Bodily Destructive",
+			"Chunky Salsa"
+		];
+	} else if (type == "GangHarm") {
+		this.name = 'Click to name Gang';
+		this.labels = [
+			"Fighting Ready",
+			"Injuries, some serious",
+			"Many injuries, some fatalities",
+			"Serious injuries, fatalities",
+			"Many fatalities",
+			"Few Survivors",
+			"No Survivors"
+		];
+	} else if (type == "VehicleHarm") {
+		this.name = 'Click to name Vehicle';
+		this.labels = [
+			"Undamaged",
+			"Cosmetic Damage, 0-harm through",
+			"Functional Damage, 1-harm through",
+			"Serious Damage, 2-harm through",
+			"Breakdown, 3-harm through",
+			"Total Destruction, full harm through",
+			"Total Destruction, full harm through",
+		];
+	} else if (type == "Legwork") {
+		this.name = 'Click to name Mission Legwork';
+		this.labels = [
+			"Everything's Cool",
+			"The team is making some noise",
+			"The target hears vague rumours",
+			"Target hears clear but unconfirmed rumors",
+			"Target has reliable intel about the run",
+			"Target has reliable intel about the team",
+			"The team is precisely identified."
+		];
+	} else if (type == "Mission") {
+		this.name = 'Click to name Mission Clock';
+		this.labels = [
+			"Everything's Cool",
+			"Target is wary and suspicious",
+			"Target is on edge and alerted",
+			"Target takes precautions",
+			"Target doubles down",
+			"Target plans evacuation",
+			"Target evacuates"
+		];
+	};
 
 	this.position = {
 		x: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,

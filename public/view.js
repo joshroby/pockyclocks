@@ -105,6 +105,20 @@ var view = {
 				newClockSVG.setAttribute('width','28vh');
 				strokeWidth = 0.5;
 			} else if (style === 'Blades in the Dark') {
+				segments = [
+					'M47.5,56.035 M52.5,3.566v40.398l28.565-28.565 C73.138,8.263,63.151,4.126,52.5,3.566z',
+					'M43.964,52.5 M56.035,47.5h40.399 c-0.561-10.651-4.697-20.638-11.834-28.566L56.035,47.5z',
+					'M43.964,47.5 M56.035,52.501l28.565,28.565 c7.136-7.928,11.273-17.915,11.834-28.565H56.035z',
+					'M47.5,43.964 M52.5,56.035v40.399 c10.651-0.561,20.638-4.697,28.566-11.834L52.5,56.035z',
+					'M52.5,43.964 M18.934,84.601 c7.928,7.137,17.915,11.273,28.566,11.834V56.035L18.934,84.601z',
+					'M56.035,47.5 M3.565,52.501 c0.561,10.651,4.698,20.638,11.833,28.565l28.565-28.565H3.565z',
+					'M56.035,52.5 M3.565,47.5h40.398L15.398,18.935 C8.263,26.863,4.126,36.849,3.565,47.5z',
+					'M52.5,56.035 M18.934,15.399L47.5,43.964V3.566 C36.848,4.126,26.862,8.263,18.934,15.399z',
+				];
+				newClockSVGDiv.style.cssFloat = 'left';
+				newClockSVG.setAttribute('viewBox','0 0 100 100');
+				newClockSVG.setAttribute('height','10vh');
+				newClockSVG.setAttribute('width','10vh');
 			} else if (style === 'MASHed') {
 			};
 
@@ -148,8 +162,8 @@ var view = {
 
 			var newClockColorSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
 			newClockColorSVG.setAttribute('viewBox','0 0 10 10');
-			newClockColorSVG.setAttribute('height','1vh');
-			newClockColorSVG.setAttribute('width','1vh');
+			newClockColorSVG.setAttribute('height','1.2vh');
+			newClockColorSVG.setAttribute('width','1.2vh');
 			var rainbowGradient = document.createElementNS('http://www.w3.org/2000/svg','linearGradient');
 			rainbowGradient.setAttribute('id','rainbowGradient');
 			newClockColorSVG.appendChild(rainbowGradient);
@@ -203,11 +217,11 @@ var view = {
 
 		var updateLabelButton = document.createElement('button');
 		updateLabelButton.setAttribute('onclick','handlers.updateLabel('+clock+','+segment+')');
-		updateLabelButton.innerHTML = 'update';
+		updateLabelButton.innerHTML = '&#10004;';
 
 		var dismissLabelButton = document.createElement('button');
 		dismissLabelButton.setAttribute('onclick','handlers.dismissLabelUpdate('+clock+')');
-		dismissLabelButton.innerHTML = 'dismiss';
+		dismissLabelButton.innerHTML = 'X';
 
 		clockSegmentViewDiv.appendChild(labelInput);
 		clockSegmentViewDiv.appendChild(updateLabelButton);
@@ -227,6 +241,7 @@ var view = {
 	displayColorPanel: function(clock) {
 		var newClockSegmentViewDiv = document.getElementById('clockSegmentViewDiv_'+clock);
 		newClockSegmentViewDiv.innerHTML = '';
+		newClockSegmentViewDiv.style.backgroundColor = clocks[clock].colors.background;
 
 		var redButton = document.createElement('button');
 		redButton.style.backgroundColor = '#ff0000';
