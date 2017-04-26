@@ -3,18 +3,8 @@ var clocks = [];
 function clockOfType(type) {
   clock = new Clock()
 
-	if (type == undefined) {
-		this.name = 'Click Here to Rename';
-		this.labels = [
-			"Noon",
-			"3 o'clock",
-			"6 o'clock",
-			"9 o'clock",
-			"10 o'clock",
-			"11 o'clock",
-			"midnight!"
-		];
-	} else if (type == "PCHarm") {
+  switch(type) {
+	case "PCHarm":
 		this.name = 'Click to name PC';
 		this.labels = [
 			"Unhurt",
@@ -25,7 +15,7 @@ function clockOfType(type) {
 			"More Serious, will deteriorate",
 			"Life has become untenable"
 		];
-	} else if (type == "NPCHarm") {
+	case "NPCHarm":
 		this.name = 'Click to name NPC';
 		this.labels = [
 			"Unhurt",
@@ -36,7 +26,7 @@ function clockOfType(type) {
 			"Bodily Destructive",
 			"Chunky Salsa"
 		];
-	} else if (type == "GangHarm") {
+	case "GangHarm":
 		this.name = 'Click to name Gang';
 		this.labels = [
 			"Fighting Ready",
@@ -47,7 +37,7 @@ function clockOfType(type) {
 			"Few Survivors",
 			"No Survivors"
 		];
-	} else if (type == "VehicleHarm") {
+	case "VehicleHarm":
 		this.name = 'Click to name Vehicle';
 		this.labels = [
 			"Undamaged",
@@ -58,7 +48,7 @@ function clockOfType(type) {
 			"Total Destruction, full harm through",
 			"Total Destruction, full harm through",
 		];
-	} else if (type == "Legwork") {
+	case "Legwork":
 		this.name = 'Click to name Mission Legwork';
 		this.labels = [
 			"Everything's Cool",
@@ -69,7 +59,7 @@ function clockOfType(type) {
 			"Target has reliable intel about the team",
 			"The team is precisely identified."
 		];
-	} else if (type == "Mission") {
+	case "Mission":
 		this.name = 'Click to name Mission Clock';
 		this.labels = [
 			"Everything's Cool",
@@ -81,6 +71,21 @@ function clockOfType(type) {
 			"Target evacuates"
 		];
 	};
+
+  return clock;
+}
+
+function Clock() {
+  this.name = 'Click Here to Rename';
+  this.labels = [
+    "Noon",
+    "3 o'clock",
+    "6 o'clock",
+    "9 o'clock",
+    "10 o'clock",
+    "11 o'clock",
+    "midnight!"
+  ];
 
 	this.position = {
 		x: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,

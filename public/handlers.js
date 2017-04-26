@@ -7,7 +7,7 @@ var handlers = {
   },
 
 	newClock: function(type) {
-		var newClock = new Clock(type);
+		var newClock = new Clock();
     clocks.push(newClock);
     handlers.sendRoom();
 	},
