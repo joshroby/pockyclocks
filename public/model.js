@@ -1,10 +1,10 @@
 var clocks = [];
 
-function Clock(type) {
-	
-	var style = document.getElementById('clockStyleSelect').value;
+function clockOfType(type) {
+  var clock = new Clock()
 
-	if (type == "PCHarm") {
+  switch(type) {
+	case "PCHarm":
 		this.name = 'Click to name PC';
 		this.labels = [
 			"Unhurt",
@@ -15,7 +15,7 @@ function Clock(type) {
 			"More Serious, will deteriorate",
 			"Life has become untenable"
 		];
-	} else if (type == "NPCHarm") {
+	case "NPCHarm":
 		this.name = 'Click to name NPC';
 		this.labels = [
 			"Unhurt",
@@ -26,7 +26,7 @@ function Clock(type) {
 			"Bodily Destructive",
 			"Chunky Salsa"
 		];
-	} else if (type == "GangHarm") {
+	case "GangHarm":
 		this.name = 'Click to name Gang';
 		this.labels = [
 			"Fighting Ready",
@@ -37,7 +37,7 @@ function Clock(type) {
 			"Few Survivors",
 			"No Survivors"
 		];
-	} else if (type == "VehicleHarm") {
+	case "VehicleHarm":
 		this.name = 'Click to name Vehicle';
 		this.labels = [
 			"Undamaged",
@@ -48,7 +48,7 @@ function Clock(type) {
 			"Total Destruction, full harm through",
 			"Total Destruction, full harm through",
 		];
-	} else if (type == "Legwork") {
+	case "Legwork":
 		this.name = 'Click to name Mission Legwork';
 		this.labels = [
 			"Everything's Cool",
@@ -59,7 +59,7 @@ function Clock(type) {
 			"Target has reliable intel about the team",
 			"The team is precisely identified."
 		];
-	} else if (type == "Mission") {
+	case "Mission":
 		this.name = 'Click to name Mission Clock';
 		this.labels = [
 			"Everything's Cool",
@@ -70,48 +70,28 @@ function Clock(type) {
 			"Target plans evacuation",
 			"Target evacuates"
 		];
-	} else if (style == "Apocalypse World") {
-		this.name = 'Click Here to Rename';
-		this.labels = [
-			"Noon",
-			"3 o'clock",
-			"6 o'clock",
-			"9 o'clock",
-			"10 o'clock",
-			"11 o'clock",
-			"midnight!"
-		];
-	} else if (style == "Sprawl") {
-		this.name = 'Click Here to Rename';
-		this.labels = [
-			"12:00",
-			"15:00",
-			"18:00",
-			"21:00",
-			"22:00",
-			"23:00",
-			"00:00"
-		];
-	} else if (style == "Blades in the Dark") {
-		this.name = 'Click Here to Rename';
-		this.labels = [
-			"8 segments left",
-			"7 segments left",
-			"6 segments left",
-			"5 segments left",
-			"4 segments left",
-			"3 segments left",
-			"2 segments left",
-			"1 segments left",
-			"Completed!",
-		];
 	};
-	
+
+  return clock;
+}
+
+function Clock() {
+  this.name = 'Click Here to Rename';
+  this.labels = [
+    "Noon",
+    "3 o'clock",
+    "6 o'clock",
+    "9 o'clock",
+    "10 o'clock",
+    "11 o'clock",
+    "midnight!"
+  ];
+
 	this.position = {
 		x: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
 		y: 10 + clocks.length * 0.01 * document.documentElement.clientWidth,
 	};
-	
+
 	this.colors = {
 		fill: 'black',
 		empty: 'white',
@@ -121,7 +101,9 @@ function Clock(type) {
 		header: 'white',
 		text: 'black',
 	};
-	
+
+	this.currentSegment = 0;
+
 // 	Random Colors (they look terrible!)
 // 	for (i in this.colors) {
 // 			var red = Math.random() * 255 << 0;
@@ -129,25 +111,32 @@ function Clock(type) {
 // 			var blue = Math.random() * 255 << 0;
 // 			this.colors[i] = "#" + ("0" + red.toString(16)).substr(-2) + ("0" + green.toString(16)).substr(-2) + ("0" + blue.toString(16)).substr(-2);
 // 	};
+};
 
-	this.currentSegment = 0;
 
-	this.advance = function() {
+Clock.prototype = {
+	advance: function() {
 		this.currentSegment = Math.min(this.currentSegment + 1,this.labels.length-1)
-	};
+	},
 
-	this.rewind = function() {
+	rewind: function() {
 		this.currentSegment = Math.max(this.currentSegment - 1,0)
-	};
+	},
 
-	this.updateLabel = function(segment,newLabel) {
+	updateLabel: function(segment,newLabel) {
 		this.labels[segment] = newLabel;
-	};
+	},
 
-	this.updateName = function(newName) {
+	updateName: function(newName) {
 		this.name = newName;
-	};
+	},
 
-	clocks.push(this);
-
+  setFrom: function(data) {
+    this.name = data.name;
+    this.currentSegment = data.currentSegment;
+    this.labels = data.labels;
+    this.position = data.position;
+    this.colors = data.colors;
+    return this;
+  },
 };

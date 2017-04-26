@@ -34,7 +34,7 @@ class RoomController < ApplicationController
       name: room.name,
       clocks: room.clocks.map do |clock|
         {
-          name: name,
+          name: clock.name,
           position: {
             x: clock.posx,
             y: clock.posy
@@ -47,7 +47,8 @@ class RoomController < ApplicationController
             header: clock.header_color,
             text: clock.text_color
           },
-          labels: clock.segments.sort_by(&:pos).map(&:name)
+          labels: clock.segments.sort_by(&:pos).map(&:name),
+          currentSegment: clock.segment
         }
       end
     }
