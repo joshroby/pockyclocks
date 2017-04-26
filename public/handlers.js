@@ -13,7 +13,7 @@ var handlers = {
 	},
 
 	addHarmClock: function() {
-		type = document.getElementById('addHarmClockSelect').value;
+		var type = document.getElementById('addHarmClockSelect').value;
     var newClock = clockOfType(type);
     clocks.push(newClock);
     handlers.sendRoom();
@@ -39,6 +39,13 @@ var handlers = {
     handlers.sendRoom();
 	},
 
+	revealTitleUpdateEv: function(ev) {
+    if (ev.currentTarget.className == "title" && ev.target.className == "titleName") {
+      ev.currentTarget.getElementsByClassName("titleName")[0].style.display = 'none';
+      ev.currentTarget.getElementsByClassName("titleUpdate")[0].style.display = 'inline';
+    }
+	},
+
 	revealTitleUpdate: function(clock) {
 		document.getElementById('titleName_'+clock).style.display = 'none';
 		document.getElementById('titleUpdate_'+clock).style.display = 'inline';
@@ -46,7 +53,7 @@ var handlers = {
 
 	dismissLabelUpdate: function(clock) {
 		document.getElementById('clockSegmentViewDiv_'+clock).innerHTML = '';
-		view.refreshClocks();
+    refreshSoon();
 	},
 
 	updateTitle: function(clock) {
@@ -87,13 +94,9 @@ var handlers = {
 		view.updateClockColor(clock,document.getElementById('colorInput_'+clock).value);
 	},
 
-  loadRoom: function(room) {
-		view.refreshClocks();
-  },
+  loadRoom: refreshSoon,
 
-  sendRoom: function() {
-		view.refreshClocks();
-  },
+  sendRoom: refreshSoon,
 
   fetcherReadyChange: function(ev) {
     var xhr = ev.target
@@ -105,7 +108,7 @@ var handlers = {
             c.setFrom(data);
             return c;
           });
-        view.refreshClocks();
+        refreshSoon();
         break;
       case 404:
         handlers.sendRoom();
@@ -131,6 +134,12 @@ var handlers = {
   },
 };
 
+function refreshSoon() {
+  window.setTimeout(function(){
+      view.refreshClocks();
+    },0);
+}
+
 function startSync(name){
   handlers.loadRoom = function() {
     var fetcher = new XMLHttpRequest();
@@ -142,7 +151,7 @@ function startSync(name){
 
   handlers.sendRoom = function() {
     var sender = new XMLHttpRequest();
-    view.refreshClocks();
+    refreshSoon();
     sender.open("PUT", "/room/"+name);
     sender.onreadystatechange = handlers.senderReadyChange;
     sender.setRequestHeader("Content-type", "application/json");
@@ -156,9 +165,9 @@ function startSync(name){
     w.roomSync = null;
 
     function bindHandlers() {
-      document.getElementById('roomInput').addEventListener('blur', handlers.roomNameSet, true);
+      document.getElementById('roomInput').addEventListener('blur', handlers.roomNameSet);
     }
 
-    w.addEventListener('mouseup',handlers.dropClock,false);
+    w.addEventListener('mouseup',handlers.dropClock);
     w.addEventListener('load', bindHandlers);
   }(window));

@@ -1,7 +1,7 @@
 var clocks = [];
 
 function clockOfType(type) {
-  clock = new Clock()
+  var clock = new Clock()
 
   switch(type) {
 	case "PCHarm":

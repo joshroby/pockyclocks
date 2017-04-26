@@ -20,11 +20,14 @@ var view = {
 			newClockTitle.style.backgroundColor = clocks[i].colors.headerBackground;
 			newClockTitle.style.color = clocks[i].colors.header;
 			newClockDiv.appendChild(newClockTitle);
+      newClockTitle.addEventListener('click', handlers.revealTitleUpdateEv)
+      newClockTitle.className = "title"
 
 			var newClockTitleName = document.createElement('span');
 			newClockTitleName.id = 'titleName_'+i;
 			newClockTitleName.innerHTML = clocks[i].name;
-			newClockTitleName.setAttribute('onclick','handlers.revealTitleUpdate('+i+')');
+			//newClockTitleName.setAttribute('onclick','handlers.revealTitleUpdate('+i+')');
+			newClockTitleName.className = 'titleName';
 			newClockTitle.appendChild(newClockTitleName);
 
 			var newClockTitleUpdate = document.createElement('span');
